@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();    
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour
         {
             direction.y += Gravity * Time.deltaTime;
         }
-        
+
         //get input for switching lanes
         if (Input.GetKeyDown(KeyCode.RightArrow))//SwipeManager.swipeRight for mobile version
         {                                       //Input.GetKeyDown(KeyCode.RightArrow) for laptop
