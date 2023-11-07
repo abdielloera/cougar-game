@@ -2225,6 +2225,8 @@ MonoBehaviour:
   - {fileID: 980572731}
   - {fileID: 1981576136}
   gameOverSceneName: GameOverScene
+  lifeLostSound: {fileID: 8300000, guid: 9bf9f4113bc0d43c5870adf19a18221f, type: 3}
+  pitchDecreaseRate: 0.1
 --- !u!54 &2057511163
 Rigidbody:
   m_ObjectHideFlags: 0
