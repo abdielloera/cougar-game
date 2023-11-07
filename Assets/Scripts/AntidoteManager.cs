@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AntidoteManager : MonoBehaviour
 {
+    private static int numberOfAntidotes = 0; // Static to keep count across all instances
 
-    // Start is called before the first frame update
+    public static event System.Action<int> OnAntidoteCollected;
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(20 * Time.deltaTime, 0, 0);
@@ -19,11 +19,14 @@ public class AntidoteManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            PlayerManager.numberOfAntidotes += 1;
-            Debug.Log("Antidotes:" + PlayerManager.numberOfAntidotes);
+            numberOfAntidotes++;
+            Debug.Log("Antidotes: " + numberOfAntidotes);
             Destroy(gameObject);
+
+            // Notify observers (UI) that an antidote is collected
+            OnAntidoteCollected?.Invoke(numberOfAntidotes);
         }
     }
 }
