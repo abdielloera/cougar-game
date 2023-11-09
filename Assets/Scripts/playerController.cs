@@ -5,7 +5,8 @@ public class playerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
-
+    public float increasedSpeed = 10f; // Speed after Z position reaches 1000
+    private bool hasReachedZ1000 = false;
     private int desiredLane = 1; // 0:left 1:middle 2:right
     public float laneDistance = 4; // the distance between two lanes 
     public float jumpForce;
@@ -32,6 +33,11 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.z >= 100 && !hasReachedZ1000)
+        {
+            forwardSpeed = increasedSpeed;
+            hasReachedZ1000 = true;
+        }
         direction.z = forwardSpeed;
 
         if (controller.isGrounded)
