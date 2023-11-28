@@ -4,7 +4,7 @@ using UnityEngine.UI; // Include this to work with UI elements
 using TMPro; // Add this for TextMeshPro support
 
 
-public class NameEntryHandler : MonoBehaviour
+public class NameEntryHandler2 : MonoBehaviour
 {
     // Declare variables to reference the input field and store the player's name
     public TMP_InputField playerNameInput; // Use TMP_InputField instead of InputField

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelStarter : MonoBehaviour
+public class LevelStarter2 : MonoBehaviour
 {
     public GameObject CountDown3;
     public GameObject CountDown2;
