@@ -72,6 +72,9 @@ public class PlayerLives : MonoBehaviour
 
     private void TransitionToGameOver()
     {
+        // Save the antidote count
+        PlayerManager.SaveAntidoteCount();
+
         if (Stopwatch.instance != null)
         {
             Stopwatch.instance.StopTimer();
@@ -79,4 +82,5 @@ public class PlayerLives : MonoBehaviour
 
         SceneManager.LoadScene(gameOverSceneName);
     }
+
 }

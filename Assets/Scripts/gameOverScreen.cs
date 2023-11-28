@@ -8,6 +8,7 @@ using TMPro;
 public class GameOverScreen : MonoBehaviour
 {
     public TMP_Text pointsText;
+    public TMP_Text antidoteText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class GameOverScreen : MonoBehaviour
         string lastRecordedTimeText = string.Format("{0:00}:{1:00}", minutes, seconds);
 
         pointsText.text = "TIME: " + lastRecordedTimeText;
-
+        DisplayAntidoteCount();
 
     }
 
@@ -54,6 +55,15 @@ public class GameOverScreen : MonoBehaviour
         }
 
         SceneManager.LoadScene("Menu");
+    }
+
+    void DisplayAntidoteCount()
+    {
+        // Retrieve the last antidote count from PlayerPrefs
+        int lastAntidoteCount = PlayerPrefs.GetInt("LastAntidoteCount", 0);
+
+        // Set the antidote text
+        antidoteText.text = "ANTIDOTES: " + lastAntidoteCount;
     }
 
 }
