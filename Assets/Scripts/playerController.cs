@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -7,30 +5,47 @@ public class playerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
-
-    private int desiredLane = 1; //0:left 1:middle 2:right
-    public float laneDistance = 4; //the distance between two lanes 
+    public float increasedSpeed = 10f; // Speed after Z position reaches 1000
+    private bool hasReachedZ1000 = false;
+    private int desiredLane = 1; // 0:left 1:middle 2:right
+    public float laneDistance = 4; // the distance between two lanes 
     public float jumpForce;
     public float Gravity = -20;
+
+    public AudioClip jumpSound; // Jump sound effect
+    private AudioSource audioSource; // Reference to the AudioSource component
 
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();    
+        controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && jumpSound != null)
+        {
+            audioSource.clip = jumpSound; // Assign the jump sound to the audio source
+        }
+        else
+        {
+            Debug.LogError("AudioSource or jumpSound is not set in the inspector!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.z >= 100 && !hasReachedZ1000)
+        {
+            forwardSpeed = increasedSpeed;
+            hasReachedZ1000 = true;
+        }
         direction.z = forwardSpeed;
 
         if (controller.isGrounded)
         {
             direction.y = -1;
             //input for player to jump, but only allow to jump if the player is grounded
-            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
-            //SwipeManager.swipeUp for mobile version
-            {                                 //Input.GetKeyDown(KeyCode.UpArrow) for laptop
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+            {
                 Jump();
             }
         }
@@ -38,17 +53,17 @@ public class playerController : MonoBehaviour
         {
             direction.y += Gravity * Time.deltaTime;
         }
-        
+
         //get input for switching lanes
-        if (Input.GetKeyDown(KeyCode.RightArrow))//SwipeManager.swipeRight for mobile version
-        {                                       //Input.GetKeyDown(KeyCode.RightArrow) for laptop
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
             desiredLane++;
             if (desiredLane == 3)
                 desiredLane = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))//SwipeManager.swipeLeft for mobile version
-        {                                       //Input.GetKeyDown(KeyCode.LeftArrow) for laptop
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
             desiredLane--;
             if (desiredLane == -1)
                 desiredLane = 0;
@@ -69,8 +84,6 @@ public class playerController : MonoBehaviour
         }
 
         //smooth transition left and right
-        //transform.position = Vector3.Lerp(transform.position, targetPosition,
-        //80 * Time.deltaTime);
         if (transform.position == targetPosition)
             return;
         Vector3 diff = targetPosition - transform.position;
@@ -90,5 +103,15 @@ public class playerController : MonoBehaviour
     private void Jump()
     {
         direction.y = jumpForce;
+
+        // Play the jump sound effect
+        if (audioSource != null && jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
+        else
+        {
+            Debug.LogError("AudioSource or jumpSound is not set!");
+        }
     }
 }
