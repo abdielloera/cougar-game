@@ -9,6 +9,7 @@ public class GameOverScreen : MonoBehaviour
 {
     public TMP_Text pointsText;
     public TMP_Text antidoteText;
+    public TMP_Text topScoresText;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class GameOverScreen : MonoBehaviour
 
         pointsText.text = "TIME: " + lastRecordedTimeText;
         DisplayAntidoteCount();
+        DisplayTopScores();
 
     }
 
@@ -64,6 +66,17 @@ public class GameOverScreen : MonoBehaviour
 
         // Set the antidote text
         antidoteText.text = "ANTIDOTES: " + lastAntidoteCount;
+    }
+
+    void DisplayTopScores()
+    {
+        var topScores = ScoreManager.GetTopScores();
+        string scoresText = "Top Scores:\n";
+        foreach (var score in topScores)
+        {
+            scoresText += $"{score.playerName}: {score.score} Antidotes - {score.date}\n";
+        }
+        topScoresText.text = scoresText;
     }
 
 }
