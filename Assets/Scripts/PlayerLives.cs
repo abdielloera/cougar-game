@@ -14,6 +14,8 @@ public class PlayerLives : MonoBehaviour
     private HashSet<GameObject> hitObstacles = new HashSet<GameObject>();
     private AudioSource audioSource;
 
+    public InvincibilityController invincibilityController; // Reference to your InvincibilityController script.
+
     private void Start()
     {
         lives = playerHeads.Count;
@@ -28,7 +30,12 @@ public class PlayerLives : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") && !hitObstacles.Contains(collision.gameObject))
         {
             hitObstacles.Add(collision.gameObject);
-            ReduceLife();
+
+            // Check if the player is not invincible before reducing life
+            if (invincibilityController == null || !invincibilityController.IsInvincible())
+            {
+                ReduceLife();
+            }
         }
     }
 
