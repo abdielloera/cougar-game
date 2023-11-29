@@ -1561,6 +1561,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 48a7ab0138dd84a889e969616a6af7fe, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 48a7ab0138dd84a889e969616a6af7fe, type: 3}
       propertyPath: m_Name
       value: the_Cougar_and_the_go_kart
@@ -2098,9 +2102,12 @@ GameObject:
   - component: {fileID: 2057511159}
   - component: {fileID: 2057511161}
   - component: {fileID: 2057511162}
+<<<<<<< Updated upstream
   - component: {fileID: 2057511163}
   - component: {fileID: 2057511164}
   - component: {fileID: 2057511165}
+=======
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -2208,6 +2215,7 @@ MonoBehaviour:
   - {fileID: 980572731}
   - {fileID: 1981576136}
   gameOverSceneName: GameOverScene
+<<<<<<< Updated upstream
   lifeLostSound: {fileID: 8300000, guid: 9bf9f4113bc0d43c5870adf19a18221f, type: 3}
   pitchDecreaseRate: 0.1
   invincibilityController: {fileID: 2057511165}
@@ -2346,6 +2354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaffc4bcd5454f45b8f1f7c8b06e091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+>>>>>>> Stashed changes
 --- !u!1 &2058935554
 GameObject:
   m_ObjectHideFlags: 0

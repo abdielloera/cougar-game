@@ -7,8 +7,13 @@ public class playerController : MonoBehaviour
     public float forwardSpeed;
     public float increasedSpeed = 10f; // Speed after Z position reaches 1000
     private bool hasReachedZ1000 = false;
+<<<<<<< Updated upstream
     private int desiredLane = 1; // 0:left 1:middle 2:right
     public float laneDistance = 4; // the distance between two lanes 
+=======
+    private int desiredLane = 1; //0:left 1:middle 2:right
+    public float laneDistance = 4; //the distance between two lanes 
+>>>>>>> Stashed changes
     public float jumpForce;
     public float Gravity = -20;
 
@@ -33,7 +38,11 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         if (transform.position.z >= 100 && !hasReachedZ1000)
+=======
+        if (transform.position.z >= 200 && !hasReachedZ1000)
+>>>>>>> Stashed changes
         {
             forwardSpeed = increasedSpeed;
             hasReachedZ1000 = true;
@@ -97,7 +106,7 @@ public class playerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(direction * Time.deltaTime);
+        controller.Move(direction * Time.fixedDeltaTime);
     }
 
     private void Jump()
