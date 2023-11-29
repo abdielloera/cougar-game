@@ -25,7 +25,7 @@ public class GameOverScreen : MonoBehaviour
 
         pointsText.text = "TIME: " + lastRecordedTimeText;
         DisplayAntidoteCount();
-        DisplayTopScores();
+   
 
     }
 
@@ -68,16 +68,7 @@ public class GameOverScreen : MonoBehaviour
         antidoteText.text = "ANTIDOTES: " + lastAntidoteCount;
     }
 
-    void DisplayTopScores()
-    {
-        var topScores = ScoreManager.GetTopScores();
-        string scoresText = "Top Scores:\n";
-        foreach (var score in topScores)
-        {
-            scoresText += $"{score.playerName}: {score.score} Antidotes - {score.date}\n";
-        }
-        topScoresText.text = scoresText;
-    }
+    
 
 }
 

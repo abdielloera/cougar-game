@@ -17,17 +17,18 @@ public class NameEntryHandler2 : MonoBehaviour
     {
         playerName = playerNameInput.text;
 
-        // Here you can add additional functionality like checking if the name is valid
         if (!string.IsNullOrEmpty(playerName))
         {
             Debug.Log("Player Name: " + playerName);
-            // You can add more code here to handle the captured name
+            PlayerPrefs.SetString("PlayerName", playerName); // Save player name
+            PlayerPrefs.Save(); // Don't forget to save PlayerPrefs
         }
         else
         {
             Debug.Log("Player name is empty");
         }
     }
+
 
     // Example function to be called elsewhere (e.g., when starting the game)
     public void StartGame()

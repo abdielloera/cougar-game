@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Data;
-using Mono.Data.Sqlite;
+
 
 
 public class PlayerLives : MonoBehaviour
@@ -82,11 +82,19 @@ public class PlayerLives : MonoBehaviour
     private void TransitionToGameOver()
     {
         // Save the antidote count
+        int antidoteCount = PlayerManager.numberOfAntidotes; // Access the field/property directly
+        float timeLasted = PlayerPrefs.GetFloat("LastRecordedTime", 0f); // Get the time lasted from PlayerPrefs
 
-        PlayerManager.numberOfAntidotes();
-        int antidoteCount = PlayerManager.SaveAntidoteCount(); 
-        SaveScore(antidoteCount);
+        // the score is calculated as antidotes + time
+        int score = antidoteCount + (int)timeLasted;
 
+        // Get the player's name from NameEntryHandler
+        string playerName = NameEntryHandler.playerName;
+
+        // Add score to HighScoreTable
+        HighScoreTable.AddNewHighScoreEntry(score, playerName, antidoteCount, timeLasted);
+
+        
         if (Stopwatch.instance != null)
         {
             Stopwatch.instance.StopTimer();
@@ -96,40 +104,6 @@ public class PlayerLives : MonoBehaviour
     }
 
    
-    public void SaveScore(int antidoteCount)
-    {
-        string playerName = NameEntryHandler.playerName;
-        string connectionString = "URI=file:" + System.IO.Path.Combine(Application.streamingAssetsPath, "highscores.db");
-
-        using (IDbConnection dbConnection = new SqliteConnection(connectionString))
-        {
-            dbConnection.Open();
-
-            using (IDbCommand dbCmd = dbConnection.CreateCommand())
-            {
-                string sqlQuery = "INSERT INTO HighScores (PlayerName, AntidoteCount, ScoreDate) VALUES (@PlayerName, @AntidoteCount, @ScoreDate)";
-                dbCmd.CommandText = sqlQuery;
-
-                IDbDataParameter playerNameParam = dbCmd.CreateParameter();
-                playerNameParam.ParameterName = "@PlayerName";
-                playerNameParam.Value = playerName;
-                dbCmd.Parameters.Add(playerNameParam);
-
-                IDbDataParameter antidoteCountParam = dbCmd.CreateParameter();
-                antidoteCountParam.ParameterName = "@AntidoteCount";
-                antidoteCountParam.Value = antidoteCount;
-                dbCmd.Parameters.Add(antidoteCountParam);
-
-                IDbDataParameter scoreDateParam = dbCmd.CreateParameter();
-                scoreDateParam.ParameterName = "@ScoreDate";
-                scoreDateParam.Value = DateTime.Now;
-                dbCmd.Parameters.Add(scoreDateParam);
-
-                dbCmd.ExecuteNonQuery();
-            }
-
-            dbConnection.Close();
-        }
-    }
+   
 
 }
