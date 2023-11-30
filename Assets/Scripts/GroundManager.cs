@@ -54,7 +54,7 @@ public class GroundManager : MonoBehaviour
     private void SpawnPowerUp()
     {
         // Randomly decide whether to spawn a power-up
-        if (Random.value < 0.25f) // Adjust the probability as needed
+        if (Random.value < 0.1f) // Adjust the probability as needed
         {
             // Spawn a power-up prefab along the road
             Instantiate(powerUpPrefab, new Vector3(GetRandomX(), 1.26f, zSpawn), Quaternion.identity);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -851,6 +851,7 @@ MonoBehaviour:
   - {fileID: 2676945727550785255, guid: c8e2cc6ce8c88427ca89d4714cb35d57, type: 3}
   - {fileID: 6155130216562567025, guid: dbde1ed253bf8483581be07348080420, type: 3}
   - {fileID: 6322418447473652694, guid: 71f0eaabe3daa4a7aa72c8586fddf664, type: 3}
+  powerUpPrefab: {fileID: 8046534068812949242, guid: 372c61685fde04fd29a3dc5ab94b2e37, type: 3}
   zSpawn: 0
   groundLength: 30
   numberOfGround: 5
@@ -3426,6 +3427,7 @@ GameObject:
   - component: {fileID: 2057511161}
   - component: {fileID: 2057511162}
   - component: {fileID: 2057511163}
+  - component: {fileID: 2057511166}
   - component: {fileID: 2057511164}
   - component: {fileID: 2057511165}
   m_Layer: 0
@@ -3537,6 +3539,7 @@ MonoBehaviour:
   gameOverSceneName: GameOverScene
   lifeLostSound: {fileID: 8300000, guid: 9bf9f4113bc0d43c5870adf19a18221f, type: 3}
   pitchDecreaseRate: 0.1
+  invincibilityController: {fileID: 2057511166}
 --- !u!54 &2057511163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3756,6 +3759,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2057511166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057511151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aaffc4bcd5454f45b8f1f7c8b06e091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2058935554
 GameObject:
   m_ObjectHideFlags: 0

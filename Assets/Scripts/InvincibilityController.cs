@@ -62,6 +62,7 @@ public class InvincibilityController : MonoBehaviour
     {
         // Reset the invincibility duration as needed
         Destroy(shieldInstance);
+        invincible = true;
         invincibilityDuration = 8f;
     }
 }
