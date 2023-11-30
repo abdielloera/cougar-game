@@ -82,7 +82,7 @@ public class PlayerLives : MonoBehaviour
     private void TransitionToGameOver()
     {
         // Save the antidote count
-        int antidoteCount = PlayerManager.numberOfAntidotes; // Access the field/property directly
+        int antidoteCount = PlayerManager.SaveAntidoteCount(); // Access the field/property directly
         float timeLasted = PlayerPrefs.GetFloat("LastRecordedTime", 0f); // Get the time lasted from PlayerPrefs
 
         // the score is calculated as antidotes + time
