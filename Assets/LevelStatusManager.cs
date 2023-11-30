@@ -15,6 +15,12 @@ public class LevelStatusManager : MonoBehaviour
         "Beginner", "Novice", "Intermediate", "Advanced", "Expert", "Master"
     };
 
+    void Start()
+    {
+        // Initialize the status text with the first level ("Beginner") at the start of the game
+        statusText.text = "Level: " + levels[currentLevel];
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
@@ -40,18 +46,3 @@ public class LevelStatusManager : MonoBehaviour
         }
     }
 }
-
-// public class LevelStatusManager : MonoBehaviour
-// {
-//     // Start is called before the first frame update
-//     void Start()
-//     {
-        
-//     }
-
-//     // Update is called once per frame
-//     void Update()
-//     {
-        
-//     }
-// }
