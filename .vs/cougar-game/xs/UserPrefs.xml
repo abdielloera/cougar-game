@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{F995601E-A18B-35E2-A68D-CABED122CE1A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/gameOverScreen.cs">
+    <Files>
+      <File FileName="Assets/Scripts/gameOverScreen.cs" Line="115" Column="21" />
+      <File FileName="Assets/Scripts/HighScoreTable.cs" Line="104" Column="1" />
+      <File FileName="Assets/Scripts/PlayerLives.cs" Line="15" Column="3" />
+      <File FileName="Assets/Scripts/StopWatch.cs" Line="72" Column="31" />
+      <File FileName="Assets/Scripts/NameEntryHandler 2.cs" Line="18" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="08edee83-b04c-463a-a9e6-282812652815" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
