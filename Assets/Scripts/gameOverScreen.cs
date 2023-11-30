@@ -14,7 +14,7 @@ public class GameOverScreen : MonoBehaviour
     public Transform HighScoreEntryContainer;
     public Transform HighScoreEntryTemplate;
 
-
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -96,7 +96,7 @@ public class GameOverScreen : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            int displayCount = Mathf.Min(highscores.highscoreEntryList.Count, 10); // Show top 10 scores
+            int displayCount = Mathf.Min(highscores.highscoreEntryList.Count, 10);
             for (int i = 0; i < displayCount; i++)
             {
                 HighScoreEntry highscoreEntry = highscores.highscoreEntryList[i];
@@ -106,17 +106,39 @@ public class GameOverScreen : MonoBehaviour
                 entryRectTransform.anchoredPosition = new Vector2(0, -20f * i);
                 entryTransform.gameObject.SetActive(true);
 
-                // Set the UI elements for each high score entry
-                entryTransform.Find("rankEntry").GetComponent<Text>().text = (i + 1).ToString();
-                entryTransform.Find("PlayerName").GetComponent<Text>().text = highscoreEntry.playerName;
-                entryTransform.Find("scoreEntry").GetComponent<Text>().text = highscoreEntry.score.ToString();
-                entryTransform.Find("antidotesEntry").GetComponent<Text>().text = highscoreEntry.antidotesCollected.ToString();
-                entryTransform.Find("timeEntry").GetComponent<Text>().text = FormatTime(highscoreEntry.timeLasted);
+                Text rankEntry = entryTransform.Find("rankEntry").GetComponent<Text>();
+                Text PlayerName = entryTransform.Find("PlayerName").GetComponent<Text>();
+                Text scoreEntry = entryTransform.Find("scoreEntry").GetComponent<Text>();
+                Text antidotesEntry = entryTransform.Find("antidotesEntry").GetComponent<Text>();
+                Text timeEntry = entryTransform.Find("timeEntry").GetComponent<Text>();
+
+                if (rankEntry != null && PlayerName != null && scoreEntry != null && antidotesEntry != null && timeEntry != null)
+                {
+                    rankEntry.text = (i + 1).ToString();
+                    PlayerName.text = highscoreEntry.PlayerName;
+                    scoreEntry.text = highscoreEntry.score.ToString();
+                    antidotesEntry.text = highscoreEntry.antidotesCollected.ToString();
+                    timeEntry.text = FormatTime(highscoreEntry.LastRecordedTime);
+                }
+                else
+                {
+                    Debug.LogError("One or more text components are missing in the HighScoreEntryTemplate.");
+                    if (rankEntry == null) Debug.LogError("rankEntry component is missing.");
+                    if (PlayerName == null) Debug.LogError("PlayerName component is missing.");
+                    if (scoreEntry == null) Debug.LogError("PlayerName component is missing.");
+                    if (antidotesEntry== null) Debug.LogError("PlayerName component is missing.");
+                    if (timeEntry== null) Debug.LogError("PlayerName component is missing.");
+
+
+
+
+                    // Repeat for scoreEntry, antidotesEntry, and timeEntry
+
+                }
             }
         }
-
-
     }
+
     private string FormatTime(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);

@@ -8,19 +8,19 @@ public class NameEntryHandler2 : MonoBehaviour
 {
     // Declare variables to reference the input field and store the player's name
     public TMP_InputField playerNameInput; // Use TMP_InputField instead of InputField
-    public static string playerName;
+    public static string PlayerName;
     private string secretKey = "YourSecretKey"; // Replace with your actual secret key
 
 
     // Function to be called when the player submits their name
     public void CapturePlayerName()
     {
-        playerName = playerNameInput.text;
+        PlayerName = playerNameInput.text;
 
-        if (!string.IsNullOrEmpty(playerName))
+        if (!string.IsNullOrEmpty(PlayerName))
         {
-            Debug.Log("Player Name: " + playerName);
-            PlayerPrefs.SetString("PlayerName", playerName); // Save player name
+            Debug.Log("Player Name: " + PlayerName);
+            PlayerPrefs.SetString("PlayerName", PlayerName); // Save player name
             PlayerPrefs.Save(); // Don't forget to save PlayerPrefs
         }
         else
@@ -33,10 +33,10 @@ public class NameEntryHandler2 : MonoBehaviour
     // Example function to be called elsewhere (e.g., when starting the game)
     public void StartGame()
     {
-        if (!string.IsNullOrEmpty(playerName))
+        if (!string.IsNullOrEmpty(PlayerName))
         {
             // Start the game with the captured player name
-            Debug.Log("Game starting with player: " + playerName);
+            Debug.Log("Game starting with player: " + PlayerName);
         }
         else
         {

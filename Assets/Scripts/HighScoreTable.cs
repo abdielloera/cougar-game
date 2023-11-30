@@ -9,7 +9,7 @@ public class HighScoreTable : MonoBehaviour
     private Transform entryTemplate;
 
     public NameEntryHandler nameEntryHandler; // Reference to the NameEntryHandler
-
+    public Stopwatch stopwatch;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class HighScoreTable : MonoBehaviour
         }
 
         int displayCount = Mathf.Min(highscores.highscoreEntryList.Count, 10); // Show top 10 scores
-        for (int i = 0; i < displayCount; i++)
+        for (int i = 0; i < Mathf.Min(highscores.highscoreEntryList.Count, 10); i++)
         {
             HighScoreEntry highscoreEntry = highscores.highscoreEntryList[i];
 
@@ -46,11 +46,11 @@ public class HighScoreTable : MonoBehaviour
             entryRectTransform.anchoredPosition = new Vector2(0, -20f * i);
             entryTransform.gameObject.SetActive(true);
 
-            // Rank
+            // Assign rank based on position in the list (i + 1)
             entryTransform.Find("rankEntry").GetComponent<Text>().text = (i + 1).ToString();
 
             // Player Name
-            entryTransform.Find("PlayerName").GetComponent<Text>().text = highscoreEntry.playerName;
+            entryTransform.Find("PlayerName").GetComponent<Text>().text = highscoreEntry.PlayerName;
 
             // Score
             entryTransform.Find("scoreEntry").GetComponent<Text>().text = highscoreEntry.score.ToString();
@@ -59,7 +59,7 @@ public class HighScoreTable : MonoBehaviour
             entryTransform.Find("antidotesEntry").GetComponent<Text>().text = highscoreEntry.antidotesCollected.ToString();
 
             // Time Lasted
-            entryTransform.Find("timeEntry").GetComponent<Text>().text = FormatTime(highscoreEntry.timeLasted);
+            entryTransform.Find("timeEntry").GetComponent<Text>().text = FormatTime(highscoreEntry.LastRecordedTime);
         }
     }
 
@@ -70,16 +70,15 @@ public class HighScoreTable : MonoBehaviour
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public static void AddNewHighScoreEntry(int score, string name, int antidotes, float time)
+    public static void AddNewHighScoreEntry(string name, int score, int antidotes, float time)
     {
         HighScoreEntry newEntry = new HighScoreEntry
         {
+            PlayerName = name,
             score = score,
-            playerName = name, // Directly use the passed name
             antidotesCollected = antidotes,
-            timeLasted = time
+            LastRecordedTime = time
         };
-
 
 
         string jsonString = PlayerPrefs.GetString("HighScoreTable");
@@ -117,8 +116,9 @@ public class HighScores
 [System.Serializable]
 public class HighScoreEntry
 {
+
+    public string PlayerName;
     public int score;
-    public string playerName;
     public int antidotesCollected;
-    public float timeLasted;
+    public float LastRecordedTime;
 }

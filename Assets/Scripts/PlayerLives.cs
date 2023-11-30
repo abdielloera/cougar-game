@@ -12,7 +12,7 @@ public class PlayerLives : MonoBehaviour
     public string gameOverSceneName = "GameOverScene";
     public AudioClip lifeLostSound; // Assign the sound effect to this variable in the Inspector
     public float pitchDecreaseRate = 0.1f; // Rate at which the pitch decreases
-    private string dbPath;
+  
 
     private int lives;
     private HashSet<GameObject> hitObstacles = new HashSet<GameObject>();
@@ -26,7 +26,6 @@ public class PlayerLives : MonoBehaviour
         // Get the AudioSource component attached to the same GameObject
         audioSource = GetComponent<AudioSource>();
 
-        dbPath = System.IO.Path.Combine(Application.streamingAssetsPath, "highscores.db");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,6 +80,7 @@ public class PlayerLives : MonoBehaviour
 
     private void TransitionToGameOver()
     {
+         
         // Save the antidote count
         int antidoteCount = PlayerManager.SaveAntidoteCount(); // Access the field/property directly
         float timeLasted = PlayerPrefs.GetFloat("LastRecordedTime", 0f); // Get the time lasted from PlayerPrefs
@@ -92,7 +92,7 @@ public class PlayerLives : MonoBehaviour
         string playerName = NameEntryHandler.playerName;
 
         // Add score to HighScoreTable
-        HighScoreTable.AddNewHighScoreEntry(score, playerName, antidoteCount, timeLasted);
+        HighScoreTable.AddNewHighScoreEntry(playerName, score, antidoteCount, timeLasted);
 
         
         if (Stopwatch.instance != null)
