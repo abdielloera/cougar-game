@@ -9,7 +9,7 @@ public class NameEntryHandler : MonoBehaviour
     // Declare variables to reference the input field and store the player's name
     public TMP_InputField playerNameInput; // Use TMP_InputField instead of InputField
     public static string playerName;
-    private string secretKey = "YourSecretKey"; // Replace with your actual secret key
+    public static int playerScore;
 
 
     // Function to be called when the player submits their name
@@ -42,4 +42,15 @@ public class NameEntryHandler : MonoBehaviour
             Debug.Log("Please enter a player name first.");
         }
     }
+
+    // Calculate the player's score based on antidotes and time
+    private int CalculatePlayerScore()
+    {
+        int numberOfAntidotes = PlayerManager.numberOfAntidotes; // Get the number of antidotes collected
+        float timeLasted = PlayerPrefs.GetFloat("LastRecordedTime", 0f); // Get the time lasted from PlayerPrefs
+
+        int score = numberOfAntidotes + (int)timeLasted; // Example score calculation
+        return score;
+    }
+
 }

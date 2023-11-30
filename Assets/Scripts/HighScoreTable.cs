@@ -8,6 +8,9 @@ public class HighScoreTable : MonoBehaviour
     private Transform entryContainer;
     private Transform entryTemplate;
 
+    public NameEntryHandler nameEntryHandler; // Reference to the NameEntryHandler
+
+
     private void Awake()
     {
         entryContainer = transform.Find("HighScoreEntryContainer");
@@ -47,7 +50,7 @@ public class HighScoreTable : MonoBehaviour
             entryTransform.Find("rankEntry").GetComponent<Text>().text = (i + 1).ToString();
 
             // Player Name
-            entryTransform.Find("playerNameEntry").GetComponent<Text>().text = highscoreEntry.playerName;
+            entryTransform.Find("PlayerName").GetComponent<Text>().text = highscoreEntry.playerName;
 
             // Score
             entryTransform.Find("scoreEntry").GetComponent<Text>().text = highscoreEntry.score.ToString();
@@ -72,10 +75,12 @@ public class HighScoreTable : MonoBehaviour
         HighScoreEntry newEntry = new HighScoreEntry
         {
             score = score,
-            playerName = name,
+            playerName = name, // Directly use the passed name
             antidotesCollected = antidotes,
             timeLasted = time
         };
+
+
 
         string jsonString = PlayerPrefs.GetString("HighScoreTable");
         HighScores highscores = JsonUtility.FromJson<HighScores>(jsonString);
@@ -96,7 +101,11 @@ public class HighScoreTable : MonoBehaviour
         jsonString = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("HighScoreTable", jsonString);
         PlayerPrefs.Save();
+
+        Debug.Log("Saving High Scores: " + jsonString);
+
     }
+
 }
 
 [System.Serializable]
