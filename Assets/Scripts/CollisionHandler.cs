@@ -17,9 +17,7 @@ public class CollisionHandler : MonoBehaviour
         {
             // Deduct a life when colliding with an obstacle.
             lifeManager.DeductLife();
-
-            // Optionally, play a sound or trigger other effects.
         }
     }
-}
 
+}

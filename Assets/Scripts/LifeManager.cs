@@ -9,6 +9,8 @@ public class LifeManager : MonoBehaviour
     public int currentLives;
     public Text livesText; // Reference to a UI text element for displaying lives.
 
+    public InvincibilityController invincibilityController; // Reference to your InvincibilityController script.
+
     void Start()
     {
         currentLives = maxLives;
@@ -17,12 +19,17 @@ public class LifeManager : MonoBehaviour
 
     public void DeductLife()
     {
-        currentLives--;
-        UpdateLivesUI();
-
-        if (currentLives <= 0)
+        Debug.LogError(invincibilityController.IsInvincible());
+        // Check if the player is not invincible before deducting a life
+        if (invincibilityController == null || !invincibilityController.IsInvincible())
         {
-            // Implement game over logic here.
+            currentLives--;
+            UpdateLivesUI();
+
+            if (currentLives <= 0)
+            {
+                // Implement game over logic here.
+            }
         }
     }
 
