@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class AntidoteManager : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateAntidoteCount(); // Update the count when the game starts
     }
 
     // Update is called once per frame
@@ -19,11 +18,18 @@ public class AntidoteManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             PlayerManager.numberOfAntidotes += 1;
-            Debug.Log("Antidotes:" + PlayerManager.numberOfAntidotes);
+            UpdateAntidoteCount(); // Update the count when an antidote is picked up
             Destroy(gameObject);
         }
     }
+
+    void UpdateAntidoteCount()
+    {
+        // Use the AntidoteTextManager instance to update the count
+        AntidoteTextManager.instance.UpdateAntidoteCount(PlayerManager.numberOfAntidotes);
+    }
 }
+

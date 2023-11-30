@@ -18,4 +18,13 @@ public class PlayerManager : MonoBehaviour
     {
         antidotesTextUI.text = "Antidotes: " + numberOfAntidotes;
     }
+
+    public static int SaveAntidoteCount()
+    {
+        PlayerPrefs.SetInt("LastAntidoteCount", numberOfAntidotes);
+        PlayerPrefs.Save();
+        return numberOfAntidotes; // Return the count
+    }
+
+
 }

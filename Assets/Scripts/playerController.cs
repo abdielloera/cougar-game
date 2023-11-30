@@ -7,18 +7,16 @@ public class playerController : MonoBehaviour
     public float forwardSpeed;
     public float increasedSpeed = 10f; // Speed after Z position reaches 1000
     private bool hasReachedZ1000 = false;
-<<<<<<< Updated upstream
     private int desiredLane = 1; // 0:left 1:middle 2:right
     public float laneDistance = 4; // the distance between two lanes 
-=======
-    private int desiredLane = 1; //0:left 1:middle 2:right
-    public float laneDistance = 4; //the distance between two lanes 
->>>>>>> Stashed changes
     public float jumpForce;
     public float Gravity = -20;
 
     public AudioClip jumpSound; // Jump sound effect
     private AudioSource audioSource; // Reference to the AudioSource component
+
+    private bool isPaused = true; // Flag to control whether the script should execute its logic
+    private float delayTimer = 3f; // 3 seconds delay
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +36,19 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
+        if (delayTimer > 0f)
+        {
+            delayTimer -= Time.deltaTime;
+            return; // Skip execution until the delay is over
+        }
+        else if (isPaused)
+        {
+            isPaused = false;
+        }
+
+        if (isPaused) return; // If paused, skip the logic
+
         if (transform.position.z >= 100 && !hasReachedZ1000)
-=======
-        if (transform.position.z >= 200 && !hasReachedZ1000)
->>>>>>> Stashed changes
         {
             forwardSpeed = increasedSpeed;
             hasReachedZ1000 = true;
@@ -106,22 +112,27 @@ public class playerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(direction * Time.fixedDeltaTime);
+        if (!isPaused)
+        {
+            controller.Move(direction * Time.deltaTime);
+        }
     }
 
     private void Jump()
     {
-        direction.y = jumpForce;
+        if (!isPaused)
+        {
+            direction.y = jumpForce;
 
-        // Play the jump sound effect
-        if (audioSource != null && jumpSound != null)
-        {
-            audioSource.PlayOneShot(jumpSound);
-        }
-        else
-        {
-            Debug.LogError("AudioSource or jumpSound is not set!");
+            // Play the jump sound effect
+            if (audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
+            else
+            {
+                Debug.LogError("AudioSource or jumpSound is not set!");
+            }
         }
     }
-
 }
