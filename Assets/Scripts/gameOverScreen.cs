@@ -47,7 +47,7 @@ public class GameOverScreen : MonoBehaviour
             Destroy(Stopwatch.instance.gameObject);
         }
 
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void ExitButton()
