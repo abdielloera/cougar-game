@@ -948,11 +948,7 @@ GameObject:
   - component: {fileID: 1027085586}
   - component: {fileID: 1027085585}
   m_Layer: 5
-<<<<<<< Updated upstream
-  m_Name: playerNameEntry
-=======
   m_Name: PlayerName
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2705,11 +2701,7 @@ GameObject:
   - component: {fileID: 1695128734}
   - component: {fileID: 1695128733}
   m_Layer: 5
-<<<<<<< Updated upstream
-  m_Name: Scores
-=======
   m_Name: scoreEntry
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3158,8 +3150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsText: {fileID: 1084298227}
   antidoteText: {fileID: 1792945410}
-  highScoreEntryContainer: {fileID: 1623122625}
-  highScoreEntryTemplate: {fileID: 2074148409}
+  HighScoreEntryContainer: {fileID: 1623122625}
+  HighScoreEntryTemplate: {fileID: 2074148409}
 --- !u!114 &1742478686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3362,10 +3354,7 @@ RectTransform:
   m_Children:
   - {fileID: 1489241937}
   - {fileID: 1027085584}
-<<<<<<< Updated upstream
-=======
   - {fileID: 1695128732}
->>>>>>> Stashed changes
   - {fileID: 833963547}
   - {fileID: 1688804816}
   m_Father: {fileID: 1623122625}
