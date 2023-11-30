@@ -15,6 +15,9 @@ public class playerController : MonoBehaviour
     public AudioClip jumpSound; // Jump sound effect
     private AudioSource audioSource; // Reference to the AudioSource component
 
+    private bool isPaused = true; // Flag to control whether the script should execute its logic
+    private float delayTimer = 3f; // 3 seconds delay
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,18 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (delayTimer > 0f)
+        {
+            delayTimer -= Time.deltaTime;
+            return; // Skip execution until the delay is over
+        }
+        else if (isPaused)
+        {
+            isPaused = false;
+        }
+
+        if (isPaused) return; // If paused, skip the logic
+
         if (transform.position.z >= 100 && !hasReachedZ1000)
         {
             forwardSpeed = increasedSpeed;
@@ -97,21 +112,27 @@ public class playerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(direction * Time.deltaTime);
+        if (!isPaused)
+        {
+            controller.Move(direction * Time.deltaTime);
+        }
     }
 
     private void Jump()
     {
-        direction.y = jumpForce;
+        if (!isPaused)
+        {
+            direction.y = jumpForce;
 
-        // Play the jump sound effect
-        if (audioSource != null && jumpSound != null)
-        {
-            audioSource.PlayOneShot(jumpSound);
-        }
-        else
-        {
-            Debug.LogError("AudioSource or jumpSound is not set!");
+            // Play the jump sound effect
+            if (audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
+            else
+            {
+                Debug.LogError("AudioSource or jumpSound is not set!");
+            }
         }
     }
 }
